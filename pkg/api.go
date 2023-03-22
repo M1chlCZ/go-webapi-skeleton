@@ -2,9 +2,11 @@ package pkg
 
 import (
 	"context"
+	"exbitron_info_app/pkg/database"
 	"exbitron_info_app/pkg/utils"
 	"fmt"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"os"
 	"os/signal"
 	"syscall"
@@ -19,7 +21,8 @@ func RunAPI() {
 		ReadTimeout:   time.Second * 35,
 		IdleTimeout:   time.Second * 65,
 	})
-
+	app.Use(cors.New())
+	database.InitMySQL()
 	utils.ReportMessage(fmt.Sprintf("EXBITRON API STARTED ON PORT 6900 | Version: %s", utils.VERSION))
 	app.Get("/ping", ping)
 
