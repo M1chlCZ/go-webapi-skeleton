@@ -25,7 +25,7 @@ func RunAPI() {
 	app.Use(cors.New())
 	app.Use(helmet.New(
 		helmet.Config{
-			ContentSecurityPolicy: "default-src 'self'",
+			ContentSecurityPolicy: "connect-src http://localhost:6900",
 		}))
 	database.InitMySQL()
 	utils.ReportMessage(fmt.Sprintf("EXBITRON API STARTED ON PORT 6900 | Version: %s", utils.VERSION))
